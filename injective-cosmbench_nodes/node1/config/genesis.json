@@ -1,7 +1,7 @@
 {
   "app_name": "injectived",
   "app_version": "",
-  "genesis_time": "2024-12-29T03:00:45.475568834Z",
+  "genesis_time": "2025-01-04T02:20:07.585391032Z",
   "chain_id": "injective-cosmbench",
   "initial_height": 1,
   "app_hash": null,
@@ -26,18 +26,7 @@
         "sig_verify_cost_ed25519": "590",
         "sig_verify_cost_secp256k1": "1000"
       },
-      "accounts": [
-        {
-          "@type": "/injective.types.v1beta1.EthAccount",
-          "base_account": {
-            "address": "inj1qdqnk578df0na7qx8uv4elsenfc33ak5qn6ttr",
-            "pub_key": null,
-            "account_number": "0",
-            "sequence": "0"
-          },
-          "code_hash": "xdJGAYb3IzySfn2y3McDwOUAtlPKgic7e/rYBF2FpHA="
-        }
-      ]
+      "accounts": []
     },
     "authz": {
       "authorization": []
@@ -47,23 +36,8 @@
         "send_enabled": [],
         "default_send_enabled": true
       },
-      "balances": [
-        {
-          "address": "inj1qdqnk578df0na7qx8uv4elsenfc33ak5qn6ttr",
-          "coins": [
-            {
-              "denom": "stake",
-              "amount": "9990004452404000000000"
-            }
-          ]
-        }
-      ],
-      "supply": [
-        {
-          "denom": "stake",
-          "amount": "9990004452404000000000"
-        }
-      ],
+      "balances": [],
+      "supply": [],
       "denom_metadata": [],
       "send_enabled": []
     },
