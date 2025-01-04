@@ -1,0 +1,13 @@
+#!/bin/bash
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -d'{"tx_bytes":"CokBCoYBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmYKKmluajFucWUwcmZ2amM5N3ZtNHpoN3hnZ2V5OTVtOHMzNTZnYXR5ZzVlZhIqaW5qMW5xZTByZnZqYzk3dm00emg3eGdnZXk5NW04czM1NmdhdHlnNWVmGgwKBXN0YWtlEgMxMDASZApcClQKLS9pbmplY3RpdmUuY3J5cHRvLnYxYmV0YTEuZXRoc2VjcDI1NmsxLlB1YktleRIjCiEDjoc4bSGbVvQBHXnLR47Dkl9zSpjRwBLoh1Zyy43QsUwSBAoCCAESBBDAmgwaQWuocdhpcFjD4ICG+QzLPUXq3dOkEvMa7lWg+3/hi85+b4S4XbbrZr7q/8l/yHZTFFkPXyweRggDLtHjkYQWRuMA","mode":"BROADCAST_MODE_SYNC"}' \
+    147.46.240.248:32200/cosmos/tx/v1beta1/txs
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-d'{"tx_bytes":"CokBCoYBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmYKKmluajFyZXk2dnU5ZHJ3ZDllNXA3M3EwN2FjMHludDV6YXh5M2RmY201aBIqaW5qMXJleTZ2dTlkcndkOWU1cDczcTA3YWMweW50NXpheHkzZGZjbTVoGgwKBXN0YWtlEgMxMDASZApcClQKLS9pbmplY3RpdmUuY3J5cHRvLnYxYmV0YTEuZXRoc2VjcDI1NmsxLlB1YktleRIjCiECzZGP2nSURY8PkmZZ2o3TXsxzXurlKrTofOzwcl6AKCkSBAoCCAESBBDAmgwaQS3YiJTKnL2o/jTeILHJD6F1EUlUVwvJEjp9dyNtZIt8KbmQv9UJ7NPYZ/Ydzof9M+UP9P5NTteNBsxOlLIP0F4B","mode":"BROADCAST_MODE_SYNC"}' \
+147.46.240.248:32200/cosmos/tx/v1beta1/txs
+
+
