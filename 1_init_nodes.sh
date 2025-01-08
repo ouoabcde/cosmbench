@@ -4,7 +4,10 @@
 source ./env.sh
 
 
-rm -rf $NODE_ROOT_DIR
+if [ -d "$NODE_ROOT_DIR" ]; then
+    echo "Removing $NODE_ROOT_DIR directory..."
+    rm -rf $NODE_ROOT_DIR
+fi
 
 echo "The number of nodes: "$NODE_COUNT
 for ((i=0;i<$NODE_COUNT;i++))
@@ -16,9 +19,9 @@ do
 done
 echo "The number of nodes: "$NODE_COUNT
 
-echo "[ SHOW NODE ID ]"
-for ((i=0;i<$NODE_COUNT;i++))
-do
-    CURRENT_DATA_DIR=$NODE_ROOT_DIR/node$i
-    $BINARY tendermint show-node-id --home $CURRENT_DATA_DIR
-done
+# echo "[ SHOW NODE ID ]"
+# for ((i=0;i<$NODE_COUNT;i++))
+# do
+#     CURRENT_DATA_DIR=$NODE_ROOT_DIR/node$i
+#     $BINARY tendermint show-node-id --home $CURRENT_DATA_DIR
+# done

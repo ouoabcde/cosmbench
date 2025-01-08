@@ -61,10 +61,18 @@ done
 # [persistent peers]
 echo "Update persistent_peers"
 PERSISTENT_PEERS=""
+for ((i=0;i<$NODE_COUNT;i++))
+do
+    CURRENT_DATA_DIR=$NODE_ROOT_DIR/node$i
+    $BINARY tendermint show-node-id --home $CURRENT_DATA_DIR
+done
+
 
 for ((i=0;i<$NODE_COUNT;i++))
 do
-    PERSISTENT_PEERS=$PERSISTENT_PEERS${NODE_IDS[$i]}'@'${PRIVATE_HOSTS[$i]}':'${P2P_PORTS[$i]}','
+    CURRENT_DATA_DIR=$NODE_ROOT_DIR/node$i
+    NODE_ID=$($BINARY tendermint show-node-id --home $CURRENT_DATA_DIR)
+    PERSISTENT_PEERS=$PERSISTENT_PEERS${NODE_ID}'@'${PRIVATE_HOSTS[$i]}':'${P2P_PORTS[$i]}','
 done
 PERSISTENT_PEERS=${PERSISTENT_PEERS%,} #마지막에 ,를 제거하겠다는 의미
 

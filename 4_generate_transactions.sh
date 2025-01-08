@@ -26,7 +26,6 @@ do
         echo "$BINARY keys show $ACCOUNT_NAME -a --home $CURRENT_DATA_DIR --keyring-backend test"
         ACCOUNT_ADDRESS=$($BINARY keys show $ACCOUNT_NAME -a --home $CURRENT_DATA_DIR --keyring-backend test)
         echo $ACCOUNT_ADDRESS
-
         # echo "
         # $BINARY tx bank send $ACCOUNT_ADDRESS $ACCOUNT_ADDRESS $SEND_AMOUNT$UNIT --chain-id $CHAIN_ID --home $CURRENT_DATA_DIR --keyring-backend test --generate-only > $UNSIGNED_TX_ROOT_DIR/$UNSIGNED_TX_PREFIX$NUMBER"
 
@@ -50,12 +49,12 @@ do
 done
 
 
-echo "[ SHOW NODE ID ]"
-for ((i=0;i<$NODE_COUNT;i++))
-do
-    CURRENT_DATA_DIR=$NODE_ROOT_DIR/node$i
-    $BINARY tendermint show-node-id --home $CURRENT_DATA_DIR
-done
+# echo "[ SHOW NODE ID ]"
+# for ((i=0;i<$NODE_COUNT;i++))
+# do
+#     CURRENT_DATA_DIR=$NODE_ROOT_DIR/node$i
+#     $BINARY tendermint show-node-id --home $CURRENT_DATA_DIR
+# done
 
 
 echo "### 5_generate_signed_transactions.sh done"

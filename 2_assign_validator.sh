@@ -49,6 +49,8 @@ do
     rm -rf $CURRENT_DATA_DIR/keyring-test
 done
 
+cp -f $NODE_ROOT_DIR/node1/config/config.toml $GENESIS_DIR/config/config.toml   
+
 cp -f $GENESIS_DIR/config/genesis.json $GENESIS_DIR/config/validator_genesis.json
 
 
