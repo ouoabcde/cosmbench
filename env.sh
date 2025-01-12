@@ -1,8 +1,8 @@
 #!/bin/bash
 
-CHAIN_NAME="injective"  
+CHAIN_NAME="sei"  
 CHAIN_ID=$CHAIN_NAME"-cosmbench" #블록체인 ID
-BINARY="./bin/"$CHAIN_NAME"d"
+BINARY=$CHAIN_NAME"d"
 MONIKER="cosmbench"
 # ADDRESS_PREFIX="mssong"
 
@@ -12,7 +12,7 @@ NODE_COUNT=4 #노드 수
 ACCOUNT_COUNT_PER_LOOP=4 #노드 당 생성할 어카운트 수
 #즉, 총 어카운트 수 = NODE_COUNT * ACCOUNT_COUNT_PER_LOOP
 
-UNIT="stake" ##전송 코인 이름
+UNIT="usei" ##전송 코인 이름
 SEND_AMOUNT=100 ##전송 코인 갯수
 
 NODE_ROOT_DIR=$CHAIN_ID"_nodes" #노드들을 가지고 있는 디렉토리
