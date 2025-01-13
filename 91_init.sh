@@ -70,6 +70,18 @@ do
         # TCP PORT 변경
         echo "sed -i '' "s#address = \"tcp://0.0.0.0:1317\"#address = \"tcp://${PRIVATE_HOSTS[$INDEX]}:${API_PORTS[$INDEX]}\"#g" "$CURRENT_DATA_DIR/config/app.toml""
         sed -i '' "s#address = \"tcp://0.0.0.0:1317\"#address = \"tcp://${PRIVATE_HOSTS[$INDEX]}:${API_PORTS[$INDEX]}\"#g" "$CURRENT_DATA_DIR/config/app.toml"
+
+        # HTTP PORT 변경
+        echo "sed -i '' "s#http_port = 8545#http_port = ${HTTP_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml""
+        sed -i '' "s#http_port = 8545#http_port = ${HTTP_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml"
+
+        # WEB SOCKET PORT 변경
+        echo "sed -i '' "s#ws_port = 8546#ws_port = ${WEB_SOCKET_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml""
+        sed -i '' "s#ws_port = 8546#ws_port = ${WEB_SOCKET_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml"
+
+        # Turn off prometheus
+        echo "sed -i '' "s#prometheus = true#prometheus = false#g" "$CURRENT_DATA_DIR/config/config.toml""
+        sed -i '' "s#prometheus = true#prometheus = false#g" "$CURRENT_DATA_DIR/config/config.toml"
     else # Linux and others
         # "stake" -> "usei"로 변경
         sed -i 's/"stake"/"usei"/g' "$CURRENT_DATA_DIR/config/genesis.json"
@@ -116,6 +128,18 @@ do
         # TCP PORT 변경
         echo "sed -i "s#address = \"tcp://0.0.0.0:1317\"#address = \"tcp://${PRIVATE_HOSTS[$INDEX]}:${API_PORTS[$INDEX]}\"#g" "$CURRENT_DATA_DIR/config/app.toml""
         sed -i "s#address = \"tcp://0.0.0.0:1317\"#address = \"tcp://${PRIVATE_HOSTS[$INDEX]}:${API_PORTS[$INDEX]}\"#g" "$CURRENT_DATA_DIR/config/app.toml"
+
+        # HTTP PORT 변경
+        echo "sed -i "s#http_port = 8545#http_port = ${HTTP_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml""
+        sed -i "s#http_port = 8545#http_port = ${HTTP_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml"
+
+        # WEB SOCKET PORT 변경
+        echo "sed -i "s#ws_port = 8546#ws_port = ${WEB_SOCKET_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml""
+        sed -i "s#ws_port = 8546#ws_port = ${WEB_SOCKET_PORTS[$INDEX]}#g" "$CURRENT_DATA_DIR/config/app.toml"
+
+        # Turn off prometheus
+        echo "sed -i "s#prometheus = true#prometheus = false#g" "$CURRENT_DATA_DIR/config/config.toml""
+        sed -i "s#prometheus = true#prometheus = false#g" "$CURRENT_DATA_DIR/config/config.toml"
     fi
 done
 
@@ -127,7 +151,6 @@ do
     CURRENT_DATA_DIR=$NODE_ROOT_DIR/node$i
     $BINARY tendermint show-node-id --home $CURRENT_DATA_DIR
 done
-
 
 for ((i=0;i<$NODE_COUNT;i++))
 do
@@ -146,8 +169,53 @@ do
     if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "sed -i '' "s/persistent-peers = ".*"/persistent-peers = \"$PERSISTENT_PEERS\"/g" $CURRENT_DATA_DIR/config/config.toml"
         sed -i '' "s/persistent-peers = ".*"/persistent-peers = \"$PERSISTENT_PEERS\"/g" "$CURRENT_DATA_DIR/config/config.toml"
-    else
+    else # Linux and others
         echo "sed -i "s/persistent-peers = ".*"/persistent-peers = \"$PERSISTENT_PEERS\"/g" $CURRENT_DATA_DIR/config/config.toml"
         sed -i "s/persistent-peers = ".*"/persistent-peers = \"$PERSISTENT_PEERS\"/g" "$CURRENT_DATA_DIR/config/config.toml"
     fi
 done
+
+# [persistent_peers] 설정
+# echo "Updating persistent_peers..."
+# PERSISTENT_PEERS=""
+# for ((j = 0; j < $NODE_COUNT; j++)); do
+#     PEER_ID=$($BINARY tendermint show-node-id --home "$TESTDIR/node$j")
+#     if [ -n "$PEER_ID" ]; then
+#         PERSISTENT_PEERS+="${PEER_ID}@${PRIVATE_HOSTS[$j]}:${P2P_PORTS[$j]},"
+#     else
+#         echo "Failed to retrieve PEER_ID for node${j}. Skipping..."
+#     fi
+# done
+
+# # 마지막 , 제거
+# PERSISTENT_PEERS=${PERSISTENT_PEERS%,}
+
+# # persistent_peers 반영
+# for ((i = 0; i < $NODE_COUNT; i++)); do
+#     CURRENT_DATA_DIR="$TESTDIR/node$i"
+#     sed -i '' "s/persistent-peers = \"\"/persistent-peers = \"$PERSISTENT_PEERS\"/g" "$CURRENT_DATA_DIR/config/config.toml"
+# done
+
+# # [persistent peers]
+# echo "Update persistent_peers"
+# PERSISTENT_PEERS=""
+
+# for ((j = 0; j < $NODE_COUNT; j++)); do
+#     # 각 노드의 PEER_ID를 동적으로 가져옴
+#     PEER_ID=$($BINARY tendermint show-node-id --home "${TESTDIR}/node${j}")
+
+#     # PEER_ID 확인 후 추가
+#     if [ -n "$PEER_ID" ]; then
+#         PERSISTENT_PEERS+="${PEER_ID}@${PRIVATE_HOSTS[$j]}:${P2P_PORTS[$j]},"
+#     else
+#         echo "Failed to retrieve PEER_ID for node${j}. Skipping..."
+#     fi
+# done
+
+# echo "PERSISTENT_PEERS : "$PERSISTENT_PEERS
+# for ((i = 0; i < $NODE_COUNT; i++))
+# do
+#     CURRENT_DATA_DIR=$TESTDIR/node$i
+#     # echo "sed -i "s/persistent_peers = \"\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" $CURRENT_DATA_DIR/config/config.toml"
+#     sed -i '' "s/persistent-peers = \"\"/persistent-peers = \"$PERSISTENT_PEERS\"/g" $CURRENT_DATA_DIR/config/config.toml
+# done
